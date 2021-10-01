@@ -40,15 +40,17 @@ module.exports={
 
                             if(result[i]['function']==0){
                                 //console.log(result[i]['name']," prova ",cost,"-",(cost/100),"*",(result[i]['discount']));
-                                //console.log(result[i]['function'])
-                                cost=cost-(cost/100)*(result[i]['discount']);
+                                //console.log(result[i]['function'])4
+                                //cost=cost-(cost/100)*(result[i]['discount']);
+                                cost=discount(cost,result[i]['discount'],quantity,result[i]['function'])
                                 promotion=promotion+result[i]['discount'];
                             }else{
-                                //console.log(cost,">",result[i]['price']*quantity-(result[i]['price']/100)*result[i]['discount'])
-                                if(cost>result[i]['price']*quantity-(result[i]['price']/100)*result[i]['discount']){
+                                //console.log(cost,">",result[i]['price']*quantity-((result[i]['price']*quantity)/100)*result[i]['discount'])
+                                if(cost>result[i]['price']*quantity-((result[i]['price']*quantity)/100)*result[i]['discount']){
                                         //console.log('entro:',result[i]['price'])
                                         //console.log(result[i]['price']*quantity,"-",(result[i]['price']/100),"*",result[i]['discount'])
-                                        cost=result[i]['price']*quantity-((result[i]['price']*quantity)/100)*result[i]['discount'];
+                                        //cost=result[i]['price']*quantity-((result[i]['price']*quantity)/100)*result[i]['discount'];
+                                        cost=discount(result[i]['price'],result[i]['discount'],quantity,result[i]['function'])
                                         //console.log(cost);
                                         promotion=result[i]['discount'];
 
@@ -77,7 +79,8 @@ module.exports={
         //console.log(res);
         res.sort(sortByPrice)
         return res;
-    }
+    },
+    discount
 }
 function sortByPrice(a,b){
     if (a[2] === b[2]) {
@@ -85,6 +88,15 @@ function sortByPrice(a,b){
     }
     else {
         return (a[2] < b[2]) ? -1 : 1;
+    }
+
+}
+
+function discount(cost,discount,quantity,func) {
+    if(func==0){
+        return cost-(cost/100)*(discount);
+    }else{
+        return cost*quantity-((cost*quantity)/100)*discount;
     }
 
 }
