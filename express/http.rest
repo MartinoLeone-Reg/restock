@@ -1,1 +1,1 @@
-GET HTTP://localhost:3000/prova
+GET HTTP://localhost:3000/query
