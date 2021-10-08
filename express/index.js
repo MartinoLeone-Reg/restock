@@ -18,7 +18,7 @@ app.get("/query/:search/:date/:quantity",function(req,res){
     let product=req.params.search;
     let date=req.params.date;
     let quantity= req.params.quantity;
-    console.log(product)
+    //console.log(product)
         let query="SELECT * FROM supplier,owned,stock,has,promotion WHERE stock.productName LIKE '%"+product+"%' AND owned.idSt=stock.idSt AND supplier.idS=owned.idS AND owned.quantity>="+quantity+" AND owned.idO=has.idO AND has.idPromotion=promotion.idPromotion ORDER BY owned.shippingTime";
 
         var mysql = require('mysql');

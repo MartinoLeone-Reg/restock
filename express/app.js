@@ -1,5 +1,3 @@
-var mysql = require('mysql');
-
 module.exports={
     queryProduct:function(result,quantity,date){
         let res=[[]];
@@ -54,6 +52,7 @@ module.exports={
             }   
         }
         res.sort(sortByPrice)
+        //console.log(res)
         return res;
     },
     discount

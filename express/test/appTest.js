@@ -2,7 +2,7 @@ const assert=require('chai').assert;
 
 const discount = require('../app.js').discount;
 
-const saldiMultiRemove = require('../app').saldiMultiRemove;
+const saldiMultiRemove = require('../app').queryProduct;
  
 
 describe('App Restock',function(){
@@ -15,7 +15,7 @@ describe('App Restock',function(){
         let query="SELECT * FROM supplier,owned,stock,has,promotion WHERE stock.productName LIKE '%"+product+"%' AND owned.idSt=stock.idSt AND supplier.idS=owned.idS AND owned.quantity>="+quantity+" AND owned.idO=has.idO AND has.idPromotion=promotion.idPromotion ORDER BY owned.shippingTime";
 
         var mysql = require('mysql');
-        console.log(query);
+        //console.log(query);
         var con = mysql.createConnection({
         host: "localhost",
         user: "root",
@@ -92,10 +92,10 @@ describe('App Restock',function(){
        assert.isNumber(discount(200,2,0,0,),196) 
     });
 
-    
+
     it("sconto 400*5 20%",function () {
         assert.isNumber(discount(400,20,5,1),1600);
     });
-
+    
     
 });
